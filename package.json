@@ -1,0 +1,36 @@
+{
+  "name": "@peter.naydenov/visual-controller-for-react",
+  "version": "1.0.0",
+  "description": "Tool for building a micro-frontends(MFE) based on React component",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeterNaydenov/visual-controller-for-react.git"
+  },
+  "keywords": [
+    "'micro",
+    "frontend",
+    "MFE",
+    "react",
+    "widgets",
+    "visual",
+    "controller'"
+  ],
+  "author": "Peter Naydenov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PeterNaydenov/visual-controller-for-react/issues"
+  },
+  "homepage": "https://github.com/PeterNaydenov/visual-controller-for-react#readme"
+}
