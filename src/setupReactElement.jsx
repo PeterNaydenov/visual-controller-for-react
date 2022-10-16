@@ -1,12 +1,13 @@
 'use strict'
-import React from "react";
+import React, { useState } from "react";
 
 
 
-function SetupReactElement ( Fn, props ) {
+function SetupReactElement ( loadTask, Fn, props ) {
 
-    function dummy(props) {
-        const { el } = props;
+    function dummy ( props ) {
+                const { el } = props;
+                useEffect ( () =>  loadTask.done (), [])        
                 return (
                     <>
                         {el}

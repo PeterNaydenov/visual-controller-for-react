@@ -6,10 +6,12 @@
  *  History notes:
  *   - Development started on August 13th, 2022
  *   - Published on GitHub for first time: August 14th, 2022
+ *   - Method 'publish' returns a promise: October 16th, 2022
  *  
  */
 
 
+import askForPromise from 'ask-for-promise'
 import ReactDOM from 'react-dom/client'
 import setupReactElement from './setupReactElement.jsx'
  
@@ -53,11 +55,14 @@ class VisualController {
                 const 
                       app = ReactDOM.createRoot ( node )
                     , setupUpdates = lib => updateInterface[id] = lib
-                    , el = setupReactElement ( reactFn, { dependencies, data, setupUpdates})
+                    , loadTask = askForPromise ()
+                    , endTask  = askForPromise ()
+                    , el = setupReactElement ( loadTask, reactFn, { dependencies, data, setupUpdates})
                     ;
                 app.render ( el  )
                 cache[id] = app
-                return true
+                loadTask.onComplete ( () => endTask.done ( updateInterface[id])   )
+                return endTask.promise
             }} // publish func.
 
 
