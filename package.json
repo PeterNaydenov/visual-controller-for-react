@@ -1,13 +1,12 @@
 {
   "name": "@peter.naydenov/visual-controller-for-react",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Tool for building a micro-frontends(MFE) based on React component",
   "main": "src/main.js",
   "homepage": "https://github.com/PeterNaydenov/visual-controller-for-react#readme",
   "bugs": {
-        "url": "https://github.com/PeterNaydenov/visual-controller-for-react/issues"
-    },
-  
+    "url": "https://github.com/PeterNaydenov/visual-controller-for-react/issues"
+  },
   "scripts": {
     "test": "cypress open --component --browser chrome"
   },
@@ -37,5 +36,5 @@
     "controller'"
   ],
   "author": "Peter Naydenov",
-  "license": "MIT"  
+  "license": "MIT"
 }
