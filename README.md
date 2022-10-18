@@ -71,6 +71,7 @@ html.publish ( Hello, {greeting:'Hi'}, 'app' )
   publish : 'Render React app in container. Associate app instance with the container.'
 , getApp  : 'Returns "update methods" registered by function "setupUpdates"'
 , destroy : 'Destroy app by using container name '
+, has     : 'Checks if app with specific "id" was published'
 ```
 
 

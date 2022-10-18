@@ -21,4 +21,25 @@ describe ( 'Visual controller for react', () => {
                             })
         }) // it Method "publish" returns a promise
 
+
+
+    it ( 'Method "has"', done => {
+                    const 
+                          root = document.querySelector ( cid`root` )
+                        , html = new VisualController ({})
+                        ;
+
+                    root.id = 'el'
+
+                    const before = html.has ( 'el' );
+
+                    html.publish ( Test, {}, 'el' )
+                        .then ( () => {
+                                const after = html.has ( 'el' );
+                                expect ( before ).to.be.equal ( false )
+                                expect ( after  ).to.be.equal ( true  )
+                                done ()
+                            })
+        }) // it Method "publish" returns a promise
+
 }) // describe

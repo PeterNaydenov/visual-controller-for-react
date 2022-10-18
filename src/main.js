@@ -32,6 +32,7 @@ class VisualController {
                           publish : this.publish ( dependencies, cache, updateInterface )
                         , destroy : this.destroy ( cache, updateInterface )
                         , getApp  : this.getApp  ( updateInterface )
+                        , has     : id => cache[id] ? true : false
                     }
         }
 
