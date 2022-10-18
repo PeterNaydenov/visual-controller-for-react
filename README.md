@@ -135,7 +135,7 @@ html.destroy ( containerID )
 ## Other details and requirements
 
 - Visual controller will provide a "**dependency**" object inside props to every started React app;
-
+- Check a [release history](https://github.com/PeterNaydenov/visual-controller-for-react/blob/main/Changelog.md);
 
 ### Extra
 

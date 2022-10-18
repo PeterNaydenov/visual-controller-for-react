@@ -53,6 +53,7 @@ class VisualController {
                                     console.error ( `Can't find node with id: "${id}"`)
                                     return false
                             }
+                updateInterface[id] = {}
                 const 
                       app = ReactDOM.createRoot ( node )
                     , setupUpdates = lib => updateInterface[id] = lib
@@ -62,7 +63,9 @@ class VisualController {
                     ;
                 app.render ( el  )
                 cache[id] = app
-                loadTask.onComplete ( () => endTask.done ( updateInterface[id])   )
+                loadTask.onComplete ( () => {
+                        endTask.done ( updateInterface[id])   
+                    })
                 return endTask.promise
             }} // publish func.
 
