@@ -1,5 +1,10 @@
 # Release History
 
+### 2.2.0 (2022-11-19 )
+- [x] Support for SSR hydratation;
+
+
+
 ### 2.1.1 ( 2022-10-18 )
 - [x] Fix: Error on components without update methods;
 

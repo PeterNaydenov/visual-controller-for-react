@@ -93,7 +93,8 @@ Example:
 ```
 
 Render component 'Hi' with prop 'data.greeting' and render it in html element with id "app".
-
+- If app with specific `id` exists, old copy will be destroyed first automatically. 
+- If app with `id` is not registered but container is not empty - expectation is that this is result of server rendition. If you want to not activate hydration, remove the content first;
 
 
 

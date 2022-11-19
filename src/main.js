@@ -7,6 +7,7 @@
  *   - Development started on August 13th, 2022
  *   - Published on GitHub for first time: August 14th, 2022
  *   - Method 'publish' returns a promise: October 16th, 2022
+ *   - Support for SSR hydratation: November 19th, 2022
  *  
  */
 
@@ -14,7 +15,7 @@
 import askForPromise from 'ask-for-promise'
 import ReactDOM from 'react-dom/client'
 import setupReactElement from './setupReactElement.jsx'
- 
+import hydrate from './hydrate.jsx'
 
 
 
@@ -53,19 +54,27 @@ class VisualController {
                                     console.error ( `Can't find node with id: "${id}"`)
                                     return false
                             }
+
                 updateInterface[id] = {}
-                const 
-                      app = ReactDOM.createRoot ( node )
-                    , setupUpdates = lib => updateInterface[id] = lib
-                    , loadTask = askForPromise ()
+                let app;
+                const
+                      loadTask = askForPromise ()
                     , endTask  = askForPromise ()
-                    , el = setupReactElement ( loadTask, reactFn, { dependencies, data, setupUpdates})
+                    , setupUpdates = lib => updateInterface[id] = lib
                     ;
-                app.render ( el  )
+
+                if ( node.innerHTML.trim () ) {   // Hydrate SSR result
+                            app = hydrate ( node, reactFn, { dependencies, data, setupUpdates } )
+                            setTimeout ( () =>  loadTask.done (), 0 )
+                    }
+                else {   // Start a new React App
+                            app = ReactDOM.createRoot ( node )
+                            const el = setupReactElement ( loadTask, reactFn, { dependencies, data, setupUpdates});
+                            app.render ( el  )
+                    }
+
                 cache[id] = app
-                loadTask.onComplete ( () => {
-                        endTask.done ( updateInterface[id])   
-                    })
+                loadTask.onComplete ( () => endTask.done ( updateInterface[id])   )
                 return endTask.promise
             }} // publish func.
 
