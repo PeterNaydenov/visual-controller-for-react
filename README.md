@@ -1,6 +1,9 @@
 # Visual Controller for React
 *Requirements: React > 18.0.0*
 
+![version](https://img.shields.io/github/package-json/v/peterNaydenov/visual-controller-for-react)
+![license](https://img.shields.io/github/license/peterNaydenov/visual-controller-for-react)
+
 Tool for building a **micro-frontends**(**MFE**) based on **React components** - Start multiple React applications in the same HTML page and control them.
 
 Install visual controller:
