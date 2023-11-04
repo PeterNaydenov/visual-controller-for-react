@@ -1,5 +1,10 @@
 # Release History
 
+
+### 2.2.2 (2023-11-04)
+- [x] Dependency update: Ask-for-promise@1.5.0;
+
+
 ### 2.2.0 (2022-11-19 )
 - [x] Support for SSR hydratation;
 
