@@ -1,6 +1,11 @@
 # Release History
 
 
+
+### 2.2.3 (2024-01-18)
+- [x] Dependency update: Ask-for-promise@2.0.0;
+
+
 ### 2.2.2 (2023-11-04)
 - [x] Dependency update: Ask-for-promise@1.5.0;
 
