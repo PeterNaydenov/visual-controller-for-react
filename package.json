@@ -11,16 +11,16 @@
     "test": "cypress run --component --browser chrome"
   },
   "dependencies": {
-    "ask-for-promise": "^2.0.0",
+    "ask-for-promise": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "cypress": "^13.6.3",
+    "@types/react": "^18.2.57",
+    "@types/react-dom": "^18.2.19",
+    "cypress": "^13.6.5",
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.11"
+    "vite": "^5.1.4"
   },
   "repository": {
     "type": "git",

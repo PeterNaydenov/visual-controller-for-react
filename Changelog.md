@@ -1,6 +1,12 @@
 # Release History
 
 
+### 2.2.4 (2024-02-22)
+- [x] Dependency update: Ask-for-promise@2.0.3;
+- [x] Dev dependency update - Cypress@13.6.5;
+- [x] Dev dependency update - Vite@5.1.4;
+
+
 
 ### 2.2.3 (2024-01-18)
 - [x] Dependency update: Ask-for-promise@2.0.0;
