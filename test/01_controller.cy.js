@@ -2,8 +2,6 @@ import VisualController from "../src/main";
 import Test from '../components/Test.jsx'
 import Layout from '../components/Layout.jsx'
 import NoUpdates from '../components/NoUpdates.jsx'
-import askForPromise from "ask-for-promise";
-import { renderToString } from 'react-dom/server'
 import serverRender from './serverRender'
 
 const cid = id => `[data-cy-${id}]`;
@@ -64,6 +62,7 @@ describe ( 'Visual controller for react', () => {
         }) // it No update methods
 
     it ( 'Hydrate, SSR support', done => {
+        
                     let 
                           dependencies = {r}
                         , data = {}
@@ -71,9 +70,9 @@ describe ( 'Visual controller for react', () => {
                         ;
                     const 
                           content = serverRender ( Test, {dependencies,data,setupUpdates} )
-                        , el = document.getElementById ( 'el' )
+                        , el = document.getElementById ( 'el' ) || document.createElement ( 'div' )
                         ;
-
+                  
                     el.innerHTML = content
                     
                     html.publish ( Test, {}, 'el' )

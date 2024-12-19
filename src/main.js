@@ -50,22 +50,22 @@ class VisualController {
                    }
                 if ( hasKey )   this.destroy ( id )
                 node = document.getElementById ( id )
-                        if ( !node ) {  
-                                    console.error ( `Can't find node with id: "${id}"`)
-                                    return false
-                            }
+                if ( !node ) {  
+                            console.error ( `Can't find node with id: "${id}"`)
+                            return false
+                    }
 
                 updateInterface[id] = {}
                 let app;
                 const
                       loadTask = askForPromise ()
                     , endTask  = askForPromise ()
-                    , setupUpdates = lib => updateInterface[id] = lib
+                    , setupUpdates = lib =>  updateInterface[id] = lib
                     ;
 
                 if ( node.innerHTML.trim () ) {   // Hydrate SSR result
                             app = hydrate ( node, reactFn, { dependencies, data, setupUpdates } )
-                            setTimeout ( () =>  loadTask.done (), 0 )
+                            setTimeout ( () =>  loadTask.done (), 1 )
                     }
                 else {   // Start a new React App
                             app = ReactDOM.createRoot ( node )

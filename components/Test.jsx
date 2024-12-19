@@ -8,6 +8,7 @@ function Test ( props ) {
         , [ text, setText ] = useState ('Test element')
         , [ count, setCount] = useState ( 0 )
         ;
+        
     setupUpdates ({
                 setupText : x => setText(x)
         })
