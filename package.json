@@ -17,7 +17,7 @@
     "@types/mocha": "^10.0.10",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-react": "^4.6.0",
     "cypress": "^14.3.3",
     "vite": "^7.0.2"
   },
