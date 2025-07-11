@@ -141,9 +141,12 @@ html.destroy ( containerID )
 - Visual controller will provide a "**dependency**" object inside props to every started React app;
 - Check a [release history](https://github.com/PeterNaydenov/visual-controller-for-react/blob/main/Changelog.md);
 
+
+
 ### Extra
 
 Visual Controller has versions for few other front-end frameworks:
-- [Svelte](https://github.com/PeterNaydenov/visual-controller-for-svelte3)
 - [Vue 2](https://github.com/PeterNaydenov/visual-controller-for-vue)
 - [Vue 3](https://github.com/PeterNaydenov/visual-controller-for-vue3) 
+- [Svelte](https://github.com/PeterNaydenov/visual-controller-for-svelte3)
+- [Svelte v.5](https://github.com/PeterNaydenov/visual-controller-for-svelte5)
