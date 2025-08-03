@@ -1,7 +1,7 @@
 {
   "name": "@peter.naydenov/visual-controller-for-react",
   "description": "Tool for building a micro-frontends(MFE) based on React component",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "MIT",
   "author": "Peter Naydenov",
   "main": "src/main.js",
