@@ -1,6 +1,14 @@
 # Release History
 
 
+### 3.0.2 (2025-10-29)
+- [x] Dependency update: Ask-for-promise@3.1.0;
+- [x] Dependency update: React@19.2.0;
+- [x] Dependency update: React-dom@19.2.0;
+- [x] Dev dependency update - Cypress@15.5.0;
+- [x] Dev dependency update - Vite@7.1.12;
+
+
 
 ### 3.0.1 (2025-08-03)
 - [x] Dependency update: React@19.1.1;
