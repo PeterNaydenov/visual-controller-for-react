@@ -8,6 +8,7 @@
  *   - Published on GitHub for first time: August 14th, 2022
  *   - Method 'publish' returns a promise: October 16th, 2022
  *   - Support for SSR hydratation: November 19th, 2022
+ *   - Refacoring code from class to function: April 17th, 2026
  *  
  */
 
