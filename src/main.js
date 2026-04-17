@@ -20,27 +20,15 @@ import hydrate from './hydrate.jsx'
 
 
 
-class VisualController {
-
-    constructor ( dependencies={} ) {
-              const 
-                    cache = {}  // collect react apps
-                  , updateInterface = {}
-                  ;
-
-              this.dependencies = { ...dependencies }
-              return {
-                          publish : this.publish ( dependencies, cache, updateInterface )
-                        , destroy : this.destroy ( cache, updateInterface )
-                        , getApp  : this.getApp  ( updateInterface )
-                        , has     : id => cache[id] ? true : false
-                    }
-        }
+function VisualController ( dependencies={} ) {
+        const 
+                  cache = {}  // collect react apps
+                , updateInterface = {}
+                ;
 
 
 
-    publish ( dependencies, cache, updateInterface ) {
-        return function (reactFn, data, id) {
+    function publish  (reactFn, data, id) {
                 const hasKey = cache[id] ? true : false;
                 let   node;
                 
@@ -48,7 +36,7 @@ class VisualController {
                         console.error ( `Error: Component is undefined` )
                         return false
                    }
-                if ( hasKey )   this.destroy ( id )
+                if ( hasKey )   destroy ( id )
                 node = document.getElementById ( id )
                 if ( !node ) {  
                             console.error ( `Can't find node with id: "${id}"`)
@@ -76,12 +64,11 @@ class VisualController {
                 cache[id] = app
                 loadTask.onComplete ( () => endTask.done ( updateInterface[id])   )
                 return endTask.promise
-            }} // publish func.
+            } // publish func.
 
 
 
-    destroy ( cache, updateInterface ) {
-        return function (id) {
+    function destroy (id) {
                 const htmlKeys = Object.keys(cache);
                 if ( htmlKeys.includes(id) ) {                    
                         let item    = cache[id];
@@ -91,19 +78,33 @@ class VisualController {
                         return true
                     }
                 else    return false
-            }} // destroy func.
+            } // destroy func.
 
 
             
-    getApp ( updateInterface ) {
-        return function (id) {
+    function getApp (id) {
                 const item = updateInterface[id];
                 if ( !item ) {  
                         console.error ( `App with id: "${id}" was not found.`)
                         return false
                     }
                 return item
-        }} // getApp func.
+        } // getApp func.
+
+
+    
+    function has ( id ) {
+                return cache[id] ? true : false
+        } // has func.
+
+
+
+    return {
+                  publish
+                , destroy 
+                , getApp  
+                , has
+            }
 } // visualController
 
 
