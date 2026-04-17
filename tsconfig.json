@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationDir": "dist",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "emitDeclarationOnly": true,
+    "ignoreDeprecations": "6.0",
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": ["src/main.js", "src/hydrate.jsx", "src/setupReactElement.jsx"]
+}
