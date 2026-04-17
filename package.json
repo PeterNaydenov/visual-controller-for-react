@@ -4,10 +4,29 @@
   "version": "3.0.2",
   "license": "MIT",
   "author": "Peter Naydenov",
+  "type": "module",
   "main": "src/main.js",
   "module": "dist/visual-controller-for-react.esm.js",
   "types": "dist/main.d.ts",
   "unpkg": "dist/visual-controller-for-react.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "dist/visual-controller-for-react.esm.js",
+      "require": "dist/visual-controller-for-react.cjs"
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
   "scripts": {
     "build": "vite build && npm run types",
     "types": "tsc",
