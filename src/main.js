@@ -21,6 +21,16 @@ import hydrate from './hydrate.jsx'
 
 
 
+/**
+ * Visual Controller for React
+ * Controls multiple React apps with a single controller.
+ * 
+ * @param {Object} dependencies - Object with dependencies that should be available for all components
+ * @return {Object} - Object with methods: publish, destroy, getApp, has
+ * @example
+ * const html = new VisualController ({ r })
+ * html.publish ( Test, {greeting:'Hi'}, 'app' )
+ */
 function VisualController ( dependencies={} ) {
         const 
                   cache = {}  // collect react apps
@@ -29,6 +39,16 @@ function VisualController ( dependencies={} ) {
 
 
 
+    /**
+     * Publish a React app
+     * @param {function} reactFn - React component
+     * @param {Object} data - Data for the React component
+     * @param {string} id - Id of the container where React-app will live
+     * @return {Promise} - Promise that will be resolved when the application is ready
+     * @example
+     * const html = new VisualController ({ r })
+     * html.publish ( Test, {greeting:'Hi'}, 'app' )
+     */
     function publish  (reactFn, data, id) {
                 const hasKey = cache[id] ? true : false;
                 let   node;
@@ -69,6 +89,14 @@ function VisualController ( dependencies={} ) {
 
 
 
+    /**
+     * Destroy a React app by using container name
+     * @param {string} id - Id of the container where React-app lives
+     * @return {boolean} - Returns true on success and false on failure
+     * @example
+     * const html = new VisualController ({ r })
+     * html.destroy ( 'app' )
+     */
     function destroy (id) {
                 const htmlKeys = Object.keys(cache);
                 if ( htmlKeys.includes(id) ) {                    
@@ -83,6 +111,15 @@ function VisualController ( dependencies={} ) {
 
 
             
+    /**
+     * Returns an object with update-methods for React-app defined by calling the `props.setUpdates` function from within the component.
+     * @param {string} id - Id of the container where React-app lives
+     * @return {object} - Object with update-methods for React-app or false on failure
+     * @example
+     * const html = new VisualController ({ r })
+     * const app = html.getApp ( 'app' )
+     * if ( app )   app.pushPlay () // use update methods of the component
+     */
     function getApp (id) {
                 const item = updateInterface[id];
                 if ( !item ) {  
@@ -94,6 +131,15 @@ function VisualController ( dependencies={} ) {
 
 
     
+    /**
+     * Checks if app with specific "id" was published
+     * @param {string} id - Id of the container where React-app lives
+     * @return {boolean} - Returns true if app with specific id exists, false otherwise
+     * @example
+     * const html = new VisualController ({ r })
+     * const has = html.has ( 'app' )
+     * if ( has )   console.log ( 'App is available' )
+     */
     function has ( id ) {
                 return cache[id] ? true : false
         } // has func.
