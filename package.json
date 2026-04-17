@@ -5,7 +5,10 @@
   "license": "MIT",
   "author": "Peter Naydenov",
   "main": "src/main.js",
+  "module": "dist/visual-controller-for-react.esm.js",
+  "unpkg": "dist/visual-controller-for-react.umd.js",
   "scripts": {
+    "build": "vite build",
     "test": "vitest run",
     "cover": "vitest run --coverage"
   },
