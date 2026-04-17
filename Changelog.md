@@ -1,6 +1,16 @@
 # Release History
 
 
+
+### 3.1.0 (2026-04-17)
+- [x] Refactoring: From code based on class to code based on function;
+- [x] Build a esm, commonjs and umd version of the library;
+- [x] Adding jsdoc descriptions;
+- [x] Adding typescript support;
+- [x] Update all dev dependencies;
+
+
+
 ### 3.0.2 (2025-10-29)
 - [x] Dependency update: Ask-for-promise@3.1.0;
 - [x] Dependency update: React@19.2.0;
