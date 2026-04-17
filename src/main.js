@@ -41,10 +41,10 @@ function VisualController ( dependencies={} ) {
 
     /**
      * Publish a React app
-     * @param {function} reactFn - React component
+     * @param {React.ComponentType} reactFn - React component
      * @param {Object} data - Data for the React component
      * @param {string} id - Id of the container where React-app will live
-     * @return {Promise} - Promise that will be resolved when the application is ready
+     * @return {Promise|boolean} - Promise that will be resolved when the application is ready, or false on error
      * @example
      * const html = new VisualController ({ r })
      * html.publish ( Test, {greeting:'Hi'}, 'app' )
