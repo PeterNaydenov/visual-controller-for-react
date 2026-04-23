@@ -34,7 +34,7 @@
     "cover": "vitest run --coverage"
   },
   "dependencies": {
-    "ask-for-promise": "^3.1.0",
+    "ask-for-promise": "^3.1.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },

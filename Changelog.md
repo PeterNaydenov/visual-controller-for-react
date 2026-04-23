@@ -2,6 +2,11 @@
 
 
 
+### 3.1.1 (2026-04-23)
+- [x] Dependency update. Ask-for-promise@3.1.1;
+
+
+
 ### 3.1.0 (2026-04-17)
 - [x] Refactoring: From code based on class to code based on function;
 - [x] Build a esm, commonjs and umd version of the library;
