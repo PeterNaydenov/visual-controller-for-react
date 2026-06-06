@@ -2,6 +2,13 @@
 
 
 
+### 3.1.2 (2026-06-06)
+- [x] Update dev dependencies;
+- [x] Update react versions dependencies;
+- [x] New build in esm, commonjs and umd versions;
+
+
+
 ### 3.1.1 (2026-04-23)
 - [x] Dependency update. Ask-for-promise@3.1.1;
 
