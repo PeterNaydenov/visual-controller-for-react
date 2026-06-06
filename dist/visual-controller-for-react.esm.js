@@ -7854,7 +7854,7 @@ var _ = /* @__PURE__ */ c(((e) => {
 		}
 	};
 	var Yp = n.version;
-	if (Yp !== "19.2.6") throw Error(i(527, Yp, "19.2.6"));
+	if (Yp !== "19.2.7") throw Error(i(527, Yp, "19.2.7"));
 	T.findDOMNode = function(e) {
 		var t = e._reactInternals;
 		if (t === void 0) throw typeof e.render == "function" ? Error(i(188)) : (e = Object.keys(e).join(","), Error(i(268, e)));
@@ -7862,10 +7862,10 @@ var _ = /* @__PURE__ */ c(((e) => {
 	};
 	var Xp = {
 		bundleType: 0,
-		version: "19.2.6",
+		version: "19.2.7",
 		rendererPackageName: "react-dom",
 		currentDispatcherRef: w,
-		reconcilerVersion: "19.2.6"
+		reconcilerVersion: "19.2.7"
 	};
 	if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u") {
 		var Zp = __REACT_DEVTOOLS_GLOBAL_HOOK__;
@@ -7881,7 +7881,7 @@ var _ = /* @__PURE__ */ c(((e) => {
 		if (!a(e)) throw Error(i(299));
 		var r = !1, o = "", s = rc, c = ic, l = ac, u = null;
 		return n != null && (!0 === n.unstable_strictMode && (r = !0), n.identifierPrefix !== void 0 && (o = n.identifierPrefix), n.onUncaughtError !== void 0 && (s = n.onUncaughtError), n.onCaughtError !== void 0 && (c = n.onCaughtError), n.onRecoverableError !== void 0 && (l = n.onRecoverableError), n.formState !== void 0 && (u = n.formState)), t = fp(e, 1, !0, t, n ?? null, r, o, u, s, c, l, Kp), t.context = pp(null), n = t.current, r = Tu(), r = ft(r), o = Xa(r), o.callback = null, Za(n, o, r), n = r, t.current.lanes = n, st(t, n), gd(t), e[yt] = t.current, Fd(e), new Jp(t);
-	}, e.version = "19.2.6";
+	}, e.version = "19.2.7";
 })), x = /* @__PURE__ */ c(((e) => {
 	process.env.NODE_ENV !== "production" && (function() {
 		function t(e, t) {
@@ -19013,7 +19013,7 @@ var _ = /* @__PURE__ */ c(((e) => {
 			}
 		}, (function() {
 			var e = Of.version;
-			if (e !== "19.2.6") throw Error("Incompatible React versions: The \"react\" and \"react-dom\" packages must have the exact same version. Instead got:\n  - react:      " + (e + "\n  - react-dom:  19.2.6\nLearn more: https://react.dev/warnings/version-mismatch"));
+			if (e !== "19.2.7") throw Error("Incompatible React versions: The \"react\" and \"react-dom\" packages must have the exact same version. Instead got:\n  - react:      " + (e + "\n  - react-dom:  19.2.7\nLearn more: https://react.dev/warnings/version-mismatch"));
 		})(), typeof Map == "function" && Map.prototype != null && typeof Map.prototype.forEach == "function" && typeof Set == "function" && Set.prototype != null && typeof Set.prototype.clear == "function" && typeof Set.prototype.forEach == "function" || console.error("React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://react.dev/link/react-polyfills"), Jf.findDOMNode = function(e) {
 			var t = e._reactInternals;
 			if (t === void 0) throw typeof e.render == "function" ? Error("Unable to find node on an unmounted component.") : (e = Object.keys(e).join(","), Error("Argument appears to not be a ReactComponent. Keys: " + e));
@@ -19021,10 +19021,10 @@ var _ = /* @__PURE__ */ c(((e) => {
 		}, !(function() {
 			var e = {
 				bundleType: 1,
-				version: "19.2.6",
+				version: "19.2.7",
 				rendererPackageName: "react-dom",
 				currentDispatcherRef: B,
-				reconcilerVersion: "19.2.6"
+				reconcilerVersion: "19.2.7"
 			};
 			return e.overrideHookState = DC, e.overrideHookStateDeletePath = OC, e.overrideHookStateRenamePath = kC, e.overrideProps = AC, e.overridePropsDeletePath = jC, e.overridePropsRenamePath = MC, e.scheduleUpdate = NC, e.scheduleRetry = PC, e.setErrorHandler = FC, e.setSuspenseHandler = IC, e.scheduleRefresh = g, e.scheduleRoot = h, e.setRefreshHandler = _, e.getCurrentFiber = of, je(e);
 		})() && eh && window.top === window.self && (-1 < navigator.userAgent.indexOf("Chrome") && navigator.userAgent.indexOf("Edge") === -1 || -1 < navigator.userAgent.indexOf("Firefox"))) {
@@ -19041,7 +19041,7 @@ var _ = /* @__PURE__ */ c(((e) => {
 			Ef(e), t === void 0 && console.error("Must provide initial children as second argument to hydrateRoot. Example usage: hydrateRoot(domContainer, <App />)");
 			var r = !1, i = "", a = is, o = as, s = os, c = null;
 			return n != null && (!0 === n.unstable_strictMode && (r = !0), n.identifierPrefix !== void 0 && (i = n.identifierPrefix), n.onUncaughtError !== void 0 && (a = n.onUncaughtError), n.onCaughtError !== void 0 && (o = n.onCaughtError), n.onRecoverableError !== void 0 && (s = n.onRecoverableError), n.formState !== void 0 && (c = n.formState)), t = Qd(e, 1, !0, t, n ?? null, r, i, c, a, o, s, Cf), t.context = $d(null), n = t.current, r = rl(n), r = Ge(r), i = ra(r), i.callback = null, ia(n, i, r), pi(r, "hydrateRoot()", null), n = r, t.current.lanes = n, Be(t, n), P(t), e[Jp] = t.current, uu(e), new Tf(t);
-		}, e.version = "19.2.6", typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+		}, e.version = "19.2.7", typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
 	})();
 })), ee = /* @__PURE__ */ c(((e, t) => {
 	function n() {
