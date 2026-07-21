@@ -114,7 +114,7 @@ function VisualController ( dependencies={} ) {
     /**
      * Returns an object with update-methods for React-app defined by calling the `props.setUpdates` function from within the component.
      * @param {string} id - Id of the container where React-app lives
-     * @return {object} - Object with update-methods for React-app or false on failure
+     * @return {object|false} - Object with update-methods for React-app or false on failure
      * @example
      * const html = new VisualController ({ r })
      * const app = html.getApp ( 'app' )
