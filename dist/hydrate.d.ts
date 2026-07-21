@@ -1,4 +1,4 @@
-export default hydrate;
+import React from 'react';
 /**
  * Hydrate a React component.
  * @param {HTMLElement} node - Element to hydrate into
@@ -6,5 +6,5 @@ export default hydrate;
  * @param {Object} [props={}] - Props to pass to the component
  * @returns {import('react-dom/client').Root} - Hydrated React root
  */
-declare function hydrate(node: HTMLElement, Comp: React.ComponentType, props?: any): import("react-dom/client").Root;
-import React from 'react';
+declare function hydrate(node: HTMLElement, Comp: React.ComponentType, props?: any): import('react-dom/client').Root;
+export default hydrate;

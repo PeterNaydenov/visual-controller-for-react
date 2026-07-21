@@ -1,4 +1,3 @@
-export default VisualController;
 /**
  * Visual Controller for React
  * Controls multiple React apps with a single controller.
@@ -10,3 +9,4 @@ export default VisualController;
  * html.publish ( Test, {greeting:'Hi'}, 'app' )
  */
 declare function VisualController(dependencies?: any): any;
+export default VisualController;
