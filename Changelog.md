@@ -1,6 +1,12 @@
 # Release History
 
 
+### 3.1.3 (2026-07-21)
+- [x] Dependency update: Ask-for-promise@3.2.0;
+- [x] Dev dependency update. Typescript@7.0.2;
+
+
+
 
 ### 3.1.2 (2026-06-06)
 - [x] Update dev dependencies;
