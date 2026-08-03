@@ -19056,7 +19056,7 @@ var _ = /* @__PURE__ */ c(((e) => {
 			return n != null && (!0 === n.unstable_strictMode && (r = !0), n.identifierPrefix !== void 0 && (i = n.identifierPrefix), n.onUncaughtError !== void 0 && (a = n.onUncaughtError), n.onCaughtError !== void 0 && (o = n.onCaughtError), n.onRecoverableError !== void 0 && (s = n.onRecoverableError), n.formState !== void 0 && (c = n.formState)), t = Qd(e, 1, !0, t, n ?? null, r, i, c, a, o, s, Cf), t.context = $d(null), n = t.current, r = rl(n), r = Ge(r), i = ra(r), i.callback = null, ia(n, i, r), pi(r, "hydrateRoot()", null), n = r, t.current.lanes = n, Be(t, n), P(t), e[Jp] = t.current, uu(e), new Tf(t);
 		}, e.version = "19.2.8", typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
 	})();
-})), ee = /* @__PURE__ */ c(((e, t) => {
+})), ee = /* @__PURE__ */ u((/* @__PURE__ */ c(((e, t) => {
 	function n() {
 		if (!(typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ > "u" || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE != "function")) {
 			if (process.env.NODE_ENV !== "production") throw Error("^_^");
@@ -19068,7 +19068,54 @@ var _ = /* @__PURE__ */ c(((e) => {
 		}
 	}
 	process.env.NODE_ENV === "production" ? (n(), t.exports = b()) : t.exports = x();
-})), te = /* @__PURE__ */ c(((e) => {
+})))(), 1);
+function te() {
+	let e = {}, t = {};
+	function n(n, ...r) {
+		let i = document.createTextNode(""), a = document.createTextNode(""), o = n({
+			start: i,
+			end: a
+		}, ...r);
+		if (!i.parentNode || !a.parentNode) throw Error("dim.set: callback must attach both \"start\" and \"end\" markers to the DOM");
+		let s = document.createRange();
+		s.setStartAfter(i), s.setEndBefore(a);
+		let c = {
+			isEmpty() {
+				return !i.isConnected || !a.isConnected ? !0 : (s.setStartAfter(i), s.setEndBefore(a), s.collapsed);
+			},
+			getContext() {
+				return i.isConnected && a.isConnected ? s.commonAncestorContainer : null;
+			},
+			destroy() {
+				i.isConnected && i.parentNode.removeChild(i), a.isConnected && a.parentNode.removeChild(a);
+			}
+		};
+		o && (t[o] = c), e[Object.keys(e).length] = c;
+	}
+	function r(n) {
+		if (!(typeof n != "string" && !Array.isArray(n))) return typeof n == "string" && n.includes(",") && (n = n.split(",").map((e) => e.trim())), Array.isArray(n) ? n.map((n) => t[n] || e[n]) : t[n] || e[n];
+	}
+	function i() {
+		let n = /* @__PURE__ */ new Set();
+		for (let t of Object.values(e)) n.add(t);
+		for (let e of Object.values(t)) n.add(e);
+		for (let e of n) e.destroy();
+		for (let t of Object.keys(e)) delete e[t];
+		for (let e of Object.keys(t)) delete t[e];
+	}
+	function a() {
+		return Object.keys(t);
+	}
+	return {
+		set: n,
+		get: r,
+		reset: i,
+		aliases: a
+	};
+}
+//#endregion
+//#region node_modules/react/cjs/react-jsx-runtime.production.js
+var ne = /* @__PURE__ */ c(((e) => {
 	var t = Symbol.for("react.transitional.element"), n = Symbol.for("react.fragment");
 	function r(e, n, r) {
 		var i = null;
@@ -19083,7 +19130,7 @@ var _ = /* @__PURE__ */ c(((e) => {
 		};
 	}
 	e.Fragment = n, e.jsx = r, e.jsxs = r;
-})), ne = /* @__PURE__ */ c(((e) => {
+})), re = /* @__PURE__ */ c(((e) => {
 	process.env.NODE_ENV !== "production" && (function() {
 		function t(e) {
 			if (e == null) return null;
@@ -19241,63 +19288,124 @@ var _ = /* @__PURE__ */ c(((e) => {
 			return f(e, t, n, !0, r ? Error("react-stack-top-frame") : T, r ? le(i(e)) : de);
 		};
 	})();
-})), re = /* @__PURE__ */ c(((e, t) => {
-	process.env.NODE_ENV === "production" ? t.exports = te() : t.exports = ne();
-})), ie = /* @__PURE__ */ u(ee(), 1), S = re();
-function ae(n, r, i) {
+})), ie = (/* @__PURE__ */ c(((e, t) => {
+	process.env.NODE_ENV === "production" ? t.exports = ne() : t.exports = re();
+})))();
+function S(n, r, i) {
 	function a(e) {
 		let { el: r } = e;
-		return t(() => n.done(), []), /* @__PURE__ */ (0, S.jsx)(S.Fragment, { children: r });
+		return t(() => n.done(), []), /* @__PURE__ */ (0, ie.jsx)(ie.Fragment, { children: r });
 	}
 	let o = e.createElement(r, i);
 	return e.createElement(a, { el: o });
 }
 //#endregion
 //#region src/hydrate.jsx
-function C(t, n, r = {}) {
-	return (0, ie.hydrateRoot)(t, e.createElement(n, r));
+function ae(t, n, r = {}) {
+	return (0, ee.hydrateRoot)(t, e.createElement(n, r));
 }
 //#endregion
 //#region src/main.js
-function oe(e = {}) {
-	let t = {}, n = {};
-	function r(r, a, o) {
-		let s = !!t[o], c;
-		if (!r) return console.error("Error: Component is undefined"), !1;
-		if (s && i(o), c = document.getElementById(o), !c) return console.error(`Can't find node with id: "${o}"`), !1;
-		n[o] = {};
-		let l, u = f(), d = f(), p = (e) => n[o] = e;
-		if (c.innerHTML.trim()) l = C(c, r, {
+function C(e = {}) {
+	let t = {}, n = /* @__PURE__ */ new Set(), r = {}, i = te();
+	function a(e, ...t) {
+		let a = null, o = null;
+		i.set((t, ...n) => {
+			o = t;
+			let r = e(t, ...n);
+			return typeof r == "string" && (a = r), r;
+		}, ...t), a && (n.add(a), r[a] = o);
+	}
+	function o(n, i, a = {}, o = {}) {
+		let c = f();
+		if (!i) return console.error("Error: Component is undefined"), c.done(!1), c.promise;
+		if (!n || typeof n != "string") return console.error("Error: Alias is missing or invalid"), c.done(!1), c.promise;
+		let l = r[n];
+		if (!l || !l.start.isConnected || !l.end.isConnected) return console.error(`Error: Region "${n}" was not defined or its markers are orphaned. Call html.set(...) first.`), c.done(!1), c.promise;
+		t[n] && s(n);
+		let u = [], d = l.start.nextSibling;
+		for (; d && d !== l.end;) u.push(d), d = d.nextSibling;
+		let p, m = !1;
+		if (u.length === 0) p = document.createElement("span"), p.style.display = "contents", l.end.parentNode.insertBefore(p, l.end), m = !1;
+		else if (u.length === 1 && u[0].nodeType === 1) p = u[0], m = !0;
+		else {
+			let e = document.createElement("span");
+			e.style.display = "contents", l.end.parentNode.insertBefore(e, l.end), u.forEach((t) => e.appendChild(t)), p = e, m = !0;
+		}
+		let h = {
+			app: null,
+			mountSpan: p,
+			setupUpdates: {}
+		};
+		t[n] = h;
+		let g = {
 			dependencies: e,
 			data: a,
-			setupUpdates: p
-		}), setTimeout(() => u.done(), 1);
+			setupUpdates: (e) => {
+				h.setupUpdates = e;
+			}
+		}, _ = f();
+		if (m) h.app = ae(p, i, g), setTimeout(() => _.done(), 1);
 		else {
-			l = ie.createRoot(c);
-			let t = ae(u, r, {
-				dependencies: e,
-				data: a,
-				setupUpdates: p
-			});
-			l.render(t);
+			h.app = ee.createRoot(p);
+			let e = S(_, i, g);
+			h.app.render(e);
 		}
-		return t[o] = l, u.onComplete(() => d.done(n[o])), d.promise;
+		return _.onComplete(() => c.done(h.setupUpdates)), c.promise;
 	}
-	function i(e) {
-		return Object.keys(t).includes(e) ? (t[e].unmount(), delete t[e], delete n[e], !0) : !1;
+	function s(e) {
+		if (e === void 0) {
+			let e = 0;
+			for (let n of Object.keys(t)) s(n), e++;
+			return e;
+		}
+		if (Array.isArray(e)) {
+			let n = 0;
+			for (let r of e) typeof r == "string" && t[r] && (s(r), n++);
+			return n;
+		}
+		if (typeof e != "string") return console.error("Error: destroy() expects a string alias or an array of strings"), !1;
+		let n = t[e];
+		return n ? (n.app.unmount(), n.mountSpan.parentNode && n.mountSpan.parentNode.removeChild(n.mountSpan), delete t[e], !0) : !1;
 	}
-	function a(e) {
-		return n[e] || (console.error(`App with id: "${e}" was not found.`), !1);
-	}
-	function o(e) {
+	function c(e) {
 		return !!t[e];
 	}
+	function l(e) {
+		let n = t[e];
+		return n ? n.setupUpdates : (console.error(`App with alias: "${e}" was not found.`), !1);
+	}
+	function u() {
+		return Array.from(n);
+	}
+	function d(e) {
+		if (!e || typeof e != "string") {
+			console.error("Error: Alias is missing or invalid");
+			return;
+		}
+		let t = i.get(e);
+		if (!t) {
+			console.error(`Region "${e}" was not defined. Call html.set(...) first.`);
+			return;
+		}
+		return t.isEmpty();
+	}
+	function p() {
+		for (let e of Object.keys(t)) s(e);
+		n.clear();
+		for (let e of Object.keys(r)) delete r[e];
+		i.reset();
+	}
 	return {
-		publish: r,
-		destroy: i,
-		getApp: a,
-		has: o
+		set: a,
+		publish: o,
+		destroy: s,
+		has: c,
+		getApp: l,
+		isEmpty: d,
+		list: u,
+		reset: p
 	};
 }
 //#endregion
-export { oe as default };
+export { C as default };
