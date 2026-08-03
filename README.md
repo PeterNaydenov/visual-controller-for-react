@@ -1,155 +1,362 @@
 # Visual Controller for React
-*Requirements: React > 18.0.0*
 
-![version](https://img.shields.io/github/package-json/v/peterNaydenov/visual-controller-for-react)
-![license](https://img.shields.io/github/license/peterNaydenov/visual-controller-for-react)
+![version](https://img.shields.io/github/package-json/v/PeterNaydenov/visual-controller-for-react)
+![license](https://img.shields.io/github/license/PeterNaydenov/visual-controller-for-react)
+![npm downloads](https://img.shields.io/npm/dw/@peter.naydenov/visual-controller-for-react)
+![bundle size](https://img.shields.io/bundlephobia/minzip/@peter.naydenov/visual-controller-for-react)
 
-Tool for building a **micro-frontends**(**MFE**) based on **React components** - Start multiple React applications in the same HTML page and control them.
+Run multiple React apps on the same page from a single controller. Each app gets its own region defined by invisible markers — **no DOM ids, no wrapper elements, no `getElementById` calls**.
 
-Install visual controller:
-```
-npm i @peter.naydenov/visual-controller-for-react
-```
-
-Initialization process:
 ```js
 import VisualController from '@peter.naydenov/visual-controller-for-react'
-const dependencies = {
-                // ... put here libraries that should be available for all components
-            }
-const html = new VisualController ( dependencies );
-// Controller is ready to use...
+import HeaderApp from './apps/HeaderApp.jsx'
+import SidebarApp from './apps/SidebarApp.jsx'
+import CartApp from './apps/CartApp.jsx'
+
+const html = new VisualController({})
+
+html.set(({ start, end }) => {
+    document.querySelector('header').append(start, end)
+    return 'header'
+})
+html.set(({ start, end }) => {
+    document.querySelector('aside').append(start, end)
+    return 'sidebar'
+})
+html.set(({ start, end }) => {
+    document.querySelector('main').append(start, end)
+    return 'cart'
+})
+
+html.publish('header', HeaderApp)
+html.publish('sidebar', SidebarApp)
+html.publish('cart', CartApp)
 ```
 
-Let's show something on the screen:
-```js
-// Let's have React component 'Hello' with prop 'greeting'
+Each `publish` is independent — apps can be added, removed, swapped, or destroyed at runtime. Each app gets access to the same shared dependencies through its `dependencies` prop.
 
-html.publish ( Hello, {greeting:'Hi'}, 'app' )
-//arguments are: ( component, props, containerID )
-/**
- *  Components props are a bit different
- *   function SomeComponent (props) {
- *              const { dependencies, data, setupUpdates } = props;
- *              ...
- *     }
- *   - dependencies : object provided during initialization process of VisualController
- *   - data: Your privided props. In this case: {greeting:'Hi'}
- *   - setupUpdates(function): Provide a list of all external update methods for 
- *     this component.
- * 
- * 
- *    setupUpdates example:
- *     // from component:
- *       function SomeComponent ( props ) {
- *        const 
- *              { setupUpdates } = props
- *             , [ name, setName ] = useState ('noName')
- *             , [ count, setCount ] = useState (0)
- *             ;
- *          
- *  
- *        setupUpdates ({
- *                          nameUpdate ( newName ) {
- *                                 // function definition
- *                                 setName (newName)
- *                            }
- *                          , counterUpdate () {
- *                                  // function definition
- *                            }
- *                  })
- *               }
- *      // Controller request
- *         html.getApp('someID') will return: { nameUpdate, counterUpdate }
- *        so...
- *         html.getApp('someID').nameUpdate('Peter')
- *        will trigger the nameUpdate function and will change the state of 
- *        'name' inside of the component
- * /
-```
+> **v4.0.0 — breaking change.** The v2 `id`-based API is gone. The controller is region-only: define regions with `set`, then publish by alias.
 
 
-## Visual Controller Methods
-```js
-  publish : 'Render React app in container. Associate app instance with the container.'
-, getApp  : 'Returns "update methods" registered by function "setupUpdates"'
-, destroy : 'Destroy app by using container name '
-, has     : 'Checks if app with specific "id" was published'
-```
+## Why use this
 
+Most pages need more than one React app — a header from team A, a sidebar from team B, and a checkout widget from team C. The challenge is coordinating them without coupling.
 
-
-### VisualController.publish ()
-Publish a React app.
-```js
-html.publish ( component, props, containerID )
-```
-- **component**: *object*. React component
-- **props**: *object*. Part 'data' of the React components props
-- **containerID**: *string*. Id of the container where React-app will live.
-
-Example:
-```js
- let html = new VisualController ();
-
- html.publish ( Hi, { greeting: 'hi'}, 'app' )
-```
-
-Render component 'Hi' with prop 'data.greeting' and render it in html element with id "app".
-- If app with specific `id` exists, old copy will be destroyed first automatically. 
-- If app with `id` is not registered but container is not empty - expectation is that this is result of server rendition. If you want to not activate hydration, remove the content first;
-
-
-
-
-### VisualController.getApp ()
-Returns an object with update-methods for React-app defined by calling the `props.setUpdates` function from within the component.
+The marker model replaces authored mount elements and DOM lookup with regions declared in JavaScript:
 
 ```js
- let update_functions_list = html.getApp ( containerID )
+html.set(({ start, end }) => {
+    document.querySelector('#main').append(start, end)
+    return 'app'
+})
+
+html.publish('app', MyComponent, { greeting: 'Hi!' })
 ```
-- **containerID**: *string*. Id of the container.
 
-Example:
-```js
-let 
-      id = 'videoControls'
-    , app = html.getApp ( id )
-    ;
-if ( app )   app.pushPlay () // use update methods of the component
-else { // component is not available
-       console.error ( `App for id:"${id}" is not available` )
-   }
-```
-If visual controller(html) has a React app associated with this name will return it. Otherwise will return **false**.
+The controller owns the location. No ids to manage, no collisions, and no wrapper elements authored by the page.
 
-
-
-
-
-### VisualController.destroy ()
-Will destroy React app associated with this container name and container will become empty. Function will return 'true' on success and 'false' on failure. 
-Function will not delete content of provided container if there is no React app associated with it.
+The dynamic lifecycle is the other half:
 
 ```js
-html.destroy ( containerID )
+html.publish('header', HeaderApp)
+html.publish('header', PromoBannerApp)
+html.destroy('header')
+html.publish('header', HeaderApp)
 ```
-- **containerID**: *string*. Id name.
 
-## Other details and requirements
-
-- Visual controller will provide a "**dependency**" object inside props to every started React app;
-- Check a [release history](https://github.com/PeterNaydenov/visual-controller-for-react/blob/main/Changelog.md);
+Same parent, multiple regions, no DOM ids.
 
 
+## Quick start
 
-### Extra
+```js
+import VisualController from '@peter.naydenov/visual-controller-for-react'
+import HeaderApp from './HeaderApp.jsx'
+import SidebarApp from './SidebarApp.jsx'
 
-Visual Controller has versions for few other front-end frameworks:
+const html = new VisualController({})
+
+html.set(({ start, end }) => {
+    document.querySelector('#main').append(start, end)
+    return 'header'
+})
+
+html.set(({ start, end }) => {
+    document.querySelector('#main').append(start, end)
+    return 'sidebar'
+})
+
+html.publish('header', HeaderApp, { greeting: 'Hi!' })
+html.publish('sidebar', SidebarApp)
+```
+
+```html
+<main id="main">
+    <h2>Static page heading</h2>
+</main>
+```
+
+The same parent hosts multiple regions without id collisions. Selection is by alias, not by DOM lookup.
+
+The marker model is a slim inlined subset of [`@peter.naydenov/dim`](https://github.com/PeterNaydenov/dim), located in `src/dim.js`; the dim package is not a runtime dependency.
+
+
+## API
+
+```js
+  set     : 'Define a region by placing markers in the DOM'
+, publish : 'Mount a React app into a region by alias'
+, destroy : 'Unmount the app(s); empty the range(s); keep the markers'
+, has     : 'Is an app currently published in this region?'
+, getApp  : 'Returns the setupUpdates interface for a published app'
+, isEmpty : 'Is the region empty (no content between markers)?'
+, list    : 'Returns every alias registered via set'
+, reset   : 'Unmount all apps, clear internal state, remove the markers'
+```
+
+
+### `html.set(fn, ...args)`
+
+Define a region. The callback receives `{ start, end }` text-node markers and must attach both to the DOM. Whatever string the callback returns becomes the alias used by the other methods.
+
+```js
+html.set(({ start, end }) => {
+    document.querySelector('#main').append(start, end)
+    return 'header'
+})
+
+html.set(({ start, end }, locale) => {
+    document.querySelector('#main').append(start, end)
+    return `header-${locale}`
+}, 'en')
+```
+
+Extra arguments are forwarded to the callback. Multiple regions can live inside the same parent. Markers stay where they were placed until `reset()`.
+
+
+### `html.publish(alias, component, data?, extraParams?)`
+
+Mount a React app into a region. The controller inserts a `<span style="display:contents">` between the markers, mounts React to it, and tracks the app under the alias.
+
+| Arg | Required | Default | Description |
+| --- | --- | --- | --- |
+| `alias` | yes | — | Region alias returned from `set`. |
+| `component` | yes | — | A React component. |
+| `data` | no | `{}` | Component data passed as the `data` prop. |
+| `extraParams` | no | `{}` | Reserved for future use. Accepted and ignored. |
+
+Returns a `Promise` resolving to the `setupUpdates` object, or `false` on error.
+
+```js
+html.publish('header', HeaderApp)
+html.publish('header', HeaderApp, { greeting: 'Hi!' })
+html.publish('header', HeaderApp, { greeting: 'Hi!' }, {})
+```
+
+Calling `publish` for an alias that already has a published app silently destroys the old one, then mounts the new one in the same location.
+
+
+### `html.destroy(target?)`
+
+Unmount the app published in a region and empty the range. Markers stay in the DOM, so the alias can be published again later.
+
+```js
+html.destroy('header')
+html.destroy()
+html.destroy(['header', 'sidebar'])
+```
+
+Three forms are supported:
+
+- **`destroy(alias)`** — returns `true` on success, or `false` if no app is published for the alias.
+- **`destroy()`** — destroys every published app and returns the count.
+- **`destroy(aliases)`** — destroys each app in the array and returns the count actually destroyed. Missing aliases are skipped.
+
+**`destroy()` touches:**
+
+- Unmounts the React app
+- Removes the mount span from the DOM
+- Deletes the cache entry, so `has(alias)` becomes `false`
+
+**`destroy()` does not touch:**
+
+- The markers
+- The alias in `list()`
+- The internal marker registry
+
+For a full cleanup that also removes markers, use `reset()`.
+
+
+### `html.has(alias)`
+
+Returns `true` if an app is currently published in the region, and `false` otherwise.
+
+```js
+html.has('header')
+```
+
+
+### `html.getApp(alias)`
+
+Returns the `setupUpdates` object provided by the published component, or `false` if no app is published for the alias.
+
+```js
+const app = html.getApp('header')
+if (app) app.changeMessage('New value')
+```
+
+
+### `html.isEmpty(alias)`
+
+Returns `true` when there is no content between the markers and `false` when the region contains content. Returns `undefined` for an unknown alias and logs an error. Orphaned markers are treated as empty.
+
+```js
+html.isEmpty('header')
+```
+
+After `destroy`, the markers remain and the region is empty again.
+
+
+### `html.list()`
+
+Returns every alias registered via `set`, regardless of whether an app is currently published. `reset()` clears the list.
+
+```js
+html.list()
+```
+
+
+### `html.reset()`
+
+Unmounts every published app, clears internal state, and removes every marker from the DOM. Regions must be created again with `set()` before publishing.
+
+```js
+html.reset()
+```
+
+
+## Inside a component
+
+Every published React component receives `dependencies`, `data`, and `setupUpdates` as props. Use `setupUpdates` to expose methods for external control through `getApp(alias)`.
+
+```jsx
+import { useState } from 'react'
+
+export default function HeaderApp({ dependencies, data, setupUpdates }) {
+    const [message, setMessage] = useState(data.greeting ?? 'Hello from React!')
+    const [count, setCount] = useState(0)
+
+    function changeMessage(nextMessage) {
+        setMessage(nextMessage)
+    }
+
+    function increment() {
+        setCount(value => value + 1)
+    }
+
+    setupUpdates({ changeMessage, increment })
+
+    return (
+        <section>
+            <h2>{message}</h2>
+            <p>Count: {count}</p>
+            <button onClick={increment}>Increment</button>
+        </section>
+    )
+}
+```
+
+`dependencies` contains the object passed to the controller constructor. `data` contains the component data passed to `publish`.
+
+```js
+const updates = html.getApp('header')
+updates.changeMessage('New message content')
+updates.increment()
+```
+
+
+## Other details
+
+### SSR hydration
+
+When a region already contains HTML, `publish` detects it and uses `hydrateRoot` to hydrate in place.
+
+The three cases are:
+
+- **Empty range** — inserts a fresh `<span style="display:contents">` and mounts normally.
+- **Single element between markers** — hydrates that element directly.
+- **Multiple sibling nodes between markers** — wraps them in a `<span style="display:contents">` and hydrates the wrapper.
+
+React emits its standard hydration warnings when the server markup does not match the component. The controller does not suppress them.
+
+
+## Development
+
+```bash
+npm install
+npm test
+npm run cover
+npm run types
+npm run build
+npm run dev
+```
+
+`npm run types` regenerates `dist/main.d.ts` from the JSDoc declarations. `npm run build` creates the ESM, CommonJS, and UMD bundles and regenerates the types.
+
+Source layout:
+
+| Path | Purpose |
+| --- | --- |
+| `src/main.js` | The controller and public API. |
+| `src/dim.js` | Slim inlined subset of the dim marker model. |
+| `src/setupReactElement.jsx` | React mount readiness wrapper. |
+| `src/hydrate.jsx` | SSR hydration helper. |
+| `test/` | React controller tests and fixtures. |
+| `demo/` | Runnable demo. |
+| `dist/` | Build artifacts committed for npm publishing. |
+
+When adding a method:
+
+1. Add the function to `src/main.js` with JSDoc.
+2. Export it from the return block.
+3. Add it to the `VisualControllerInstance` typedef.
+4. Add tests.
+5. Update the README API table and section.
+6. Add a changelog entry.
+
+Keep the inlined `src/dim.js` subset aligned with the upstream dim marker model when its API changes.
+
+
+## Migration from v2
+
+The v4 release replaces the v2 id-based API with the region-based API.
+
+- Replace `<div id="app">` mount containers with `html.set(({ start, end }) => { ...; return 'app' })`.
+- Change `publish(component, data, containerID)` to `publish(alias, component, data?, extraParams?)`.
+- `destroy`, `has`, and `getApp` now receive an alias rather than a DOM id.
+- `isEmpty`, `list`, and `reset` are new methods.
+- The marker subset is inlined in `src/dim.js`; no dim runtime dependency is required.
+- `setupUpdates` remains a component prop and is exposed through `getApp(alias)`.
+
+
+## Extra
+
+Visual Controller has versions for other front-end frameworks:
+
 - [Vue 3](https://github.com/PeterNaydenov/visual-controller-for-vue3)
-- [Svelte v.5](https://github.com/PeterNaydenov/visual-controller-for-svelte5)
+- [Svelte 5](https://github.com/PeterNaydenov/visual-controller-for-svelte5)
 - [Solid](https://github.com/PeterNaydenov/visual-controller-for-solid)
 - [Preact](https://github.com/PeterNaydenov/visual-controller-for-preact)
 - [Lit](https://github.com/PeterNaydenov/visual-controller-for-lit)
 - [Vue 2](https://github.com/PeterNaydenov/visual-controller-for-vue)
-- [Svelte v.3 and v.4](https://github.com/PeterNaydenov/visual-controller-for-svelte3)
+- [Svelte 3 and 4](https://github.com/PeterNaydenov/visual-controller-for-svelte3)
+
+
+## Credits
+
+`visual-controller-for-react` was created and supported by Peter Naydenov.
+
+
+## License
+
+Released under the [MIT License](https://github.com/PeterNaydenov/visual-controller-for-react/blob/main/LICENSE).
