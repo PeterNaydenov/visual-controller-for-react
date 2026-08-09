@@ -19,8 +19,8 @@
   },
   "exports": {
     ".": {
-      "import": "dist/visual-controller-for-react.esm.js",
-      "require": "dist/visual-controller-for-react.cjs"
+      "import": "./src/main.js",
+      "require": "./dist/visual-controller-for-react.cjs"
     }
   },
   "peerDependencies": {
