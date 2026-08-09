@@ -2,6 +2,14 @@
 
 
 
+### 4.0.1 (2026-08-09)
+- [x] Fix: `package.json#exports` was malformed in two ways.
+  1. Targets were missing the leading `./`. Per the Node.js package exports spec, every target must be a relative path starting with `./`; bare paths like `dist/...` are parsed as package names and rejected. Some toolchains (older Vite, esbuild) silently corrected this, but stricter resolvers (Vite 8) throw `Invalid "exports" target`.
+  2. The ESM target pointed at `dist/visual-controller-for-react.esm.js`, but that file is a Vite/rolldown library build that inlined `react-dom` and was emitted with a CJS-flavored runtime helper (`d("react")` that calls `require()`). Loading it in a browser ESM environment fails with `Calling require for "react" in an environment that doesn't expose the require function`.
+  The `import` target now points at `src/main.js` directly — already valid ESM (`import React from 'react'`, `export default VisualController`), 293 lines, no bundled deps — and the `require` target continues to point at the CJS dist for Node consumers.
+
+
+
 ### 4.0.0 (2026-08-03)
 - [x] **Breaking change.** Region-based API. The v2 `id`-based API (`publish(component, data, id)` etc.) is removed. Regions are defined with the inlined dim subset (see `src/dim.js`) via the new `set` method, which mirrors `dim.set` exactly.
 - [x] New API: `set`, `publish(alias, component, data?, extraParams?)`, `destroy`, `has`, `getApp`, `isEmpty`, `list`, `reset`.
