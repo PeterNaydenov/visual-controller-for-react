@@ -2,6 +2,11 @@
 
 
 
+### 4.0.2 (2026-10-25)
+- [x] Dependency update: Ask-for-promise@3.2.1;
+
+
+
 ### 4.0.1 (2026-08-09)
 - [x] Fix: `package.json#exports` was malformed in two ways.
   1. Targets were missing the leading `./`. Per the Node.js package exports spec, every target must be a relative path starting with `./`; bare paths like `dist/...` are parsed as package names and rejected. Some toolchains (older Vite, esbuild) silently corrected this, but stricter resolvers (Vite 8) throw `Invalid "exports" target`.
