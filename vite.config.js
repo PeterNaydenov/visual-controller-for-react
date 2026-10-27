@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/main.js'),
+      entry: resolve(import.meta.dirname, 'src/main.js'),
       name: 'VisualControllerForReact',
       formats: ['es', 'cjs', 'umd'],
       fileName: (format) => {
