@@ -16,9 +16,13 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "emitDeclarationOnly": true,
-    "ignoreDeprecations": "6.0",
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["src/main.js", "src/hydrate.jsx", "src/setupReactElement.jsx"]
+  "include": [
+    "src/main.js",
+    "src/hydrate.jsx",
+    "src/setupReactElement.jsx",
+    "src/index.ts"
+  ]
 }
