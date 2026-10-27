@@ -28,7 +28,7 @@ import hydrate from './hydrate.jsx'
 
 /**
  *  Object passed to `setupUpdates` from inside a published component.
- *  @typedef {Object} SetupUpdates
+ *  @typedef {Record<string, any>} SetupUpdates
  */
 
 /**
