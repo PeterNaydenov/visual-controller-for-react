@@ -7,7 +7,7 @@
   "type": "module",
   "main": "src/main.js",
   "module": "dist/visual-controller-for-react.esm.js",
-  "types": "dist/main.d.ts",
+  "types": "./dist/index.d.ts",
   "unpkg": "dist/visual-controller-for-react.umd.js",
   "files": [
     "dist",
@@ -19,8 +19,15 @@
   },
   "exports": {
     ".": {
-      "import": "./src/main.js",
-      "require": "./dist/visual-controller-for-react.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./src/main.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/visual-controller-for-react.cjs"
+      },
+      "default": "./src/main.js"
     }
   },
   "peerDependencies": {
@@ -30,7 +37,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && npm run types",
-    "types": "tsc",
+    "types": "tsc && node scripts/generate-cjs-types.mjs",
     "test": "vitest run",
     "cover": "vitest run --coverage"
   },
